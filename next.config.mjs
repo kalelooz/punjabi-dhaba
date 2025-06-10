@@ -1,13 +1,16 @@
 /** @type {import('next').NextConfig} */
 
-// This is a simplified configuration for hosting on Vercel.
-// We have removed the 'output', 'basePath', and 'assetPrefix' options,
-// as Vercel handles this automatically.
+// This configuration is for hosting on GitHub Pages.
+// The basePath and assetPrefix are set to match the repository name.
 
 const nextConfig = {
-  // We can also remove 'unoptimized: true' to let Vercel handle
-  // its powerful, free image optimization.
+  output: 'export', // <-- Necessary for static export
+  basePath: '/punjabi-dhaba', // <-- Updated to the correct repository name
+  assetPrefix: '/punjabi-dhaba/', // <-- Updated to the correct repository name
+  
+  // unoptimized: true is required for static exports (next export) to work correctly with next/image.
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
