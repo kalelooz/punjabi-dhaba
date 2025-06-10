@@ -1,31 +1,13 @@
 /** @type {import('next').NextConfig} */
 
-// This file configures the "address" for your website on GitHub Pages.
-
-const isGithubActions = process.env.GITHUB_ACTIONS || false;
-
-let assetPrefix = '';
-let basePath = '';
-
-if (isGithubActions) {
-  // Trim preceding slash since NEXT_PUBLIC_BASE_PATH starts with a slash
-  const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '');
-
-  assetPrefix = `/${repo}/`;
-  basePath = `/${repo}`;
-}
-
+// This is a simplified configuration for hosting on Vercel.
+// We have removed the 'output', 'basePath', and 'assetPrefix' options,
+// as Vercel handles this automatically.
 
 const nextConfig = {
-  output: 'export',
-  // This tells Next.js the full "address" for your website on GitHub Pages.
-  basePath: basePath, 
-  assetPrefix: assetPrefix,
-
-  // This tells Next.js it's allowed to load images from these websites
-  // and disables its default image optimization, which is required for GitHub Pages.
+  // We can also remove 'unoptimized: true' to let Vercel handle
+  // its powerful, free image optimization.
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
