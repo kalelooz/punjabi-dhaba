@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 
 // --- INLINE SVG ICONS ---
 const IconPhone = ({ className }) => (
@@ -74,7 +75,7 @@ const Preloader = () => (
                 animate={{ rotate: 360 }}
                 transition={{ loop: Infinity, duration: 1.5, ease: "linear" }}
             />
-            <img src="https://i.ibb.co/6yVwVjG/dhaba-logo-simple.png" alt="Dhaba Logo" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-20 w-20"/>
+            <Image src="https://i.ibb.co/6yVwVjG/dhaba-logo-simple.png" alt="Dhaba Logo" width={80} height={80} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"/>
         </div>
         <p className="text-white mt-4 text-lg font-semibold">Loading Flavors...</p>
     </motion.div>
@@ -96,7 +97,7 @@ const Header = () => {
         <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[#2E282A]/90 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
             <div className="container mx-auto px-6 py-3 flex justify-between items-center">
                 <div className="flex items-center">
-                    <img src="https://i.ibb.co/6yVwVjG/dhaba-logo-simple.png" alt="Dhaba Logo" className="h-12 w-12 mr-2"/>
+                    <Image src="https://i.ibb.co/6yVwVjG/dhaba-logo-simple.png" alt="Dhaba Logo" width={48} height={48} className="mr-2"/>
                     <div className="text-white font-bold text-xl leading-tight">
                         <span className="block" style={{ fontFamily: "'Anek Devanagari', sans-serif" }}>Punjabi</span>
                         <span className="block text-[#FF9F1C]" style={{ fontFamily: "'Anek Devanagari', sans-serif" }}>Dhaba</span>
@@ -150,7 +151,7 @@ const Hero = () => {
                     variants={titleVariants}
                     initial="hidden"
                     animate="visible"
-                    className="text-5xl md:text-7xl font-extrabold leading-tight" style={{ fontFamily: "'Anek Devanagari', sans-serif" }}>
+                    className="text-5xl md:text-7xl font-extrabold leading-tight" style={{ fontFamily: "Anek Devanagari, sans-serif" }}>
                     {heroTitle.split("").map((char, index) => (
                         <motion.span key={index} variants={letterVariants} className="inline-block">{char === " " ? "\u00A0" : char}</motion.span>
                     ))}
@@ -165,7 +166,7 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 1.5 }}
                     className="mt-4 text-lg md:text-xl max-w-2xl mx-auto"
                 >
-                    Rated 5 Stars for a reason. Experience the true taste of Punjab right here in the heart of Doha's Industrial Area.
+                    Rated 5 Stars for a reason. Experience the true taste of Punjab right here in the heart of Doha&apos;s Industrial Area.
                 </motion.p>
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 1.7 }}
@@ -187,15 +188,15 @@ const Story = () => (
     <section id="our-story" className="py-20 bg-[#2E282A]">
         <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.6 }}>
-                <img src="https://images.pexels.com/photos/2773940/pexels-photo-2773940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="A bustling Indian market scene" className="rounded-lg shadow-2xl"/>
+                <Image src="https://images.pexels.com/photos/2773940/pexels-photo-2773940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="A bustling Indian market scene" width={600} height={750} className="rounded-lg shadow-2xl w-full h-auto"/>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.6 }} className="text-white">
-                <h2 className="text-4xl font-bold text-[#FF9F1C] mb-4" style={{ fontFamily: "'Anek Devanagari', sans-serif" }}>From Punjab to Doha</h2>
+                <h2 className="text-4xl font-bold text-[#FF9F1C] mb-4" style={{ fontFamily: "Anek Devanagari, sans-serif" }}>From Punjab to Doha</h2>
                 <p className="mb-4 text-lg text-gray-300">
                     Our journey began with a simple mission: to bring the heart and soul of Punjabi roadside dhabas to Qatar. We believe in honest, hearty food that comforts and delights.
                 </p>
                 <p className="text-lg text-gray-300">
-                    Every dish is prepared with fresh ingredients and traditional recipes passed down through generations. It's more than just a meal; it's a celebration of our culture.
+                    Every dish is prepared with fresh ingredients and traditional recipes passed down through generations. It&apos;s more than just a meal; it&apos;s a celebration of our culture.
                 </p>
             </motion.div>
         </div>
@@ -238,9 +239,7 @@ const DescriptionModal = ({ dish, onClose }) => {
                 
                 const result = await response.json();
                 
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
+                if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
                     const text = result.candidates[0].content.parts[0].text;
                     setDescription(text);
                 } else {
@@ -266,10 +265,10 @@ const DescriptionModal = ({ dish, onClose }) => {
                 onClick={(e) => e.stopPropagation()}
                 className="bg-[#2E282A] p-6 rounded-lg max-w-xl w-full text-white border border-[#FF9F1C]/30 shadow-2xl flex flex-col md:flex-row gap-6"
             >
-                <img src={dish.image} alt={dish.name} className="w-full md:w-1/3 h-48 md:h-auto object-cover rounded-md"/>
+                <Image src={dish.image} alt={dish.name} width={200} height={200} className="w-full md:w-1/3 h-48 md:h-auto object-cover rounded-md"/>
                 <div className="flex flex-col">
                     <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-3xl font-bold text-[#FF9F1C]" style={{ fontFamily: "'Anek Devanagari', sans-serif" }}>{dish.name}</h3>
+                        <h3 className="text-3xl font-bold text-[#FF9F1C]" style={{ fontFamily: "Anek Devanagari, sans-serif" }}>{dish.name}</h3>
                         <button onClick={onClose} className="text-gray-400 hover:text-white"><IconX className="w-6 h-6"/></button>
                     </div>
                     {loading ? <LoadingSpinner /> : (
@@ -294,16 +293,16 @@ const Menu = () => {
         <>
         <section id="menu" className="py-20 bg-[#121212]">
             <div className="container mx-auto px-6 text-center">
-                <h2 className="text-5xl font-extrabold text-white mb-2" style={{ fontFamily: "'Anek Devanagari', sans-serif" }}>Our Dastarkhwan</h2>
+                <h2 className="text-5xl font-extrabold text-white mb-2" style={{ fontFamily: "Anek Devanagari, sans-serif" }}>Our Dastarkhwan</h2>
                 <p className="text-gray-400 mb-12 text-lg">A feast of authentic flavors, crafted with passion.</p>
                 <div className="grid lg:grid-cols-3 gap-8 text-left">
                     {Object.entries(menu).map(([category, items]) => (
                         <motion.div key={category} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.6 }} className="bg-[#2E282A]/50 p-6 rounded-lg">
-                            <h3 className="text-3xl font-bold text-[#FF9F1C] mb-6 border-b-2 border-[#FF9F1C]/30 pb-3" style={{ fontFamily: "'Anek Devanagari', sans-serif" }}>{category}</h3>
+                            <h3 className="text-3xl font-bold text-[#FF9F1C] mb-6 border-b-2 border-[#FF9F1C]/30 pb-3" style={{ fontFamily: "Anek Devanagari, sans-serif" }}>{category}</h3>
                             <div className="space-y-6">
                                 {items.map(item => (
                                     <div key={item.name} className="flex items-start gap-4">
-                                        <img src={item.image} alt={item.name} className="w-16 h-16 rounded-full object-cover border-2 border-[#FF9F1C]/50"/>
+                                        <Image src={item.image} alt={item.name} width={64} height={64} className="w-16 h-16 rounded-full object-cover border-2 border-[#FF9F1C]/50"/>
                                         <div className="flex-grow">
                                             <div className="flex justify-between items-center">
                                                 <h4 className="text-xl font-semibold text-white">{item.name}</h4>
@@ -390,8 +389,8 @@ const MealRecommender = () => {
         <section id="recommender" className="py-20 bg-[#2E282A]">
             <div className="container mx-auto px-6 text-center text-white">
                 <IconSparkles className="w-12 h-12 mx-auto text-[#FF9F1C] mb-4" />
-                <h2 className="text-4xl font-bold mb-4" style={{ fontFamily: "'Anek Devanagari', sans-serif" }}>Don't Know What to Order?</h2>
-                <p className="text-gray-300 mb-8 max-w-2xl mx-auto">Tell us what you're in the mood for, and our AI assistant will suggest the perfect Punjabi feast for you!</p>
+                <h2 className="text-4xl font-bold mb-4" style={{ fontFamily: "Anek Devanagari, sans-serif" }}>Don&apos;t Know What to Order?</h2>
+                <p className="text-gray-300 mb-8 max-w-2xl mx-auto">Tell us what you&apos;re in the mood for, and our AI assistant will suggest the perfect Punjabi feast for you!</p>
                 <div className="max-w-2xl mx-auto flex flex-col sm:flex-row gap-2">
                     <input
                         type="text"
@@ -471,7 +470,7 @@ const Testimonials = () => {
                         transition={{ duration: 0.5 }}
                         className="absolute inset-0 flex flex-col items-center justify-center bg-[#2E282A]/80 backdrop-blur-sm p-8 rounded-lg text-white"
                     >
-                        <p className="text-lg md:text-xl italic mb-6">"{testimonials[index].quote}"</p>
+                        <p className="text-lg md:text-xl italic mb-6">&quot;{testimonials[index].quote}&quot;</p>
                         <p className="font-bold text-xl text-[#FF9F1C]">- {testimonials[index].name}</p>
                     </motion.div>
                 </AnimatePresence>
@@ -519,7 +518,7 @@ const SocialFeed = () => (
             <InfiniteScroller>
                 {socialFeedImages.map((img, i) => (
                     <div key={i} className="w-64 h-64 mx-2 flex-shrink-0">
-                         <img src={img.src} alt={img.alt} className="w-full h-full object-cover rounded-lg"/>
+                         <Image src={img.src} alt={img.alt} width={256} height={256} className="w-full h-full object-cover rounded-lg"/>
                     </div>
                 ))}
             </InfiniteScroller>
@@ -596,10 +595,10 @@ const Footer = () => (
     <footer className="bg-[#2E282A] py-8 text-center text-gray-400">
         <div className="container mx-auto px-6">
             <div className="flex justify-center items-center mb-4">
-                <img src="https://i.ibb.co/6yVwVjG/dhaba-logo-simple.png" alt="Dhaba Logo" className="h-12 w-12 mr-2"/>
+                <Image src="https://i.ibb.co/6yVwVjG/dhaba-logo-simple.png" alt="Dhaba Logo" width={48} height={48} className="mr-2"/>
                 <div className="text-white font-bold text-xl leading-tight text-left">
-                    <span className="block" style={{ fontFamily: "'Anek Devanagari', sans-serif" }}>Punjabi</span>
-                    <span className="block text-[#FF9F1C]" style={{ fontFamily: "'Anek Devanagari', sans-serif" }}>Dhaba</span>
+                    <span className="block" style={{ fontFamily: "Anek Devanagari, sans-serif" }}>Punjabi</span>
+                    <span className="block text-[#FF9F1C]" style={{ fontFamily: "Anek Devanagari, sans-serif" }}>Dhaba</span>
                 </div>
             </div>
             <div className="flex justify-center space-x-6 mb-6">
