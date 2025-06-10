@@ -1,0 +1,36 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ] # Runs when you push to the main branch
+  workflow_dispatch: # Allows you to run this workflow manually
+
+# Allow this job to clone the repo and create a page deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+      - name: Install, build, and upload your site
+        uses: withastro/action-nextjs@v1
+        # If you added a basePath in your next.config.mjs, add it here too.
+        # For example, if your repository is "punjabi-dhaba":
+        # with:
+        #   base: /punjabi-dhaba
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
