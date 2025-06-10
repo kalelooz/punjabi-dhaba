@@ -1,16 +1,14 @@
 /** @type {import('next').NextConfig} */
 
-// This configuration is for hosting on GitHub Pages.
-// The basePath and assetPrefix are set to match the repository name.
+// This is the correct configuration for hosting on GitHub Pages
+// in a repository named 'punjabi-dhaba'.
 
 const nextConfig = {
-  output: 'export', // <-- Necessary for static export
-  basePath: '/punjabi-dhaba', // <-- Updated to the correct repository name
-  assetPrefix: '/punjabi-dhaba/', // <-- Updated to the correct repository name
-  
-  // unoptimized: true is required for static exports (next export) to work correctly with next/image.
+  output: 'export',
+  basePath: '/punjabi-dhaba',
+  assetPrefix: '/punjabi-dhaba/',
   images: {
-    unoptimized: true,
+    unoptimized: true, // Necessary for static export on GitHub Pages
     remotePatterns: [
       {
         protocol: 'https',
