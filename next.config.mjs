@@ -1,25 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  // The basePath and assetPrefix are only needed if you are hosting
-  // in a subdirectory on GitHub Pages (e.g., username.github.io/punjabi-dhaba)
-  // If you are using a custom domain, you can remove these.
+
+  // This tells Next.js the full "address" for your website on GitHub Pages.
   basePath: '/punjabi-dhaba', 
   assetPrefix: '/punjabi-dhaba/',
+
+  // This tells Next.js it's allowed to load images from these websites.
   images: {
-    // This allows Next.js to optimize images from these domains.
+    unoptimized: true, // Required for static export on GitHub pages
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.pexels.com',
-        port: '',
-        pathname: '**',
       },
       {
         protocol: 'https',
         hostname: 'i.ibb.co',
-        port: '',
-        pathname: '**',
       }
     ],
   },
