@@ -99,8 +99,8 @@ const Header = () => {
                 <div className="flex items-center">
                     <Image src="https://i.ibb.co/6yVwVjG/dhaba-logo-simple.png" alt="Dhaba Logo" width={48} height={48} className="mr-2"/>
                     <div className="text-white font-bold text-xl leading-tight">
-                        <span className="block" style={{ fontFamily: "'Anek Devanagari', sans-serif" }}>Punjabi</span>
-                        <span className="block text-[#FF9F1C]" style={{ fontFamily: "'Anek Devanagari', sans-serif" }}>Dhaba</span>
+                        <span className="block" style={{ fontFamily: "Anek Devanagari, sans-serif" }}>Punjabi</span>
+                        <span className="block text-[#FF9F1C]" style={{ fontFamily: "Anek Devanagari, sans-serif" }}>Dhaba</span>
                     </div>
                 </div>
                 <nav className="hidden md:flex space-x-8">
@@ -491,7 +491,6 @@ const InfiniteScroller = ({ children }) => {
         const scroller = scrollerRef.current;
         if (!scroller) return;
         
-        // Check if content is already duplicated
         if (scroller.children.length > socialFeedImages.length) return;
 
         const scrollerContent = Array.from(scroller.children);
